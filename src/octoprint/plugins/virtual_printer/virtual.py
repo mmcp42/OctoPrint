@@ -483,6 +483,14 @@ class VirtualPrinter(object):
 		# type: (str) -> None
 		self._parseHotendCommand(data, wait=True, support_r=True)
 
+	# mmcp42 added M118 support
+	def _gcode_M118(self, data):
+		# type: (str) -> None
+		# strip off leading M118
+		# and any whitespace at either end
+		self._send(data[4:].strip())
+	# mmcp42 end of M118 support
+
 	def _gcode_M140(self, data):
 		# type: (str) -> None
 		self._parseBedCommand(data)
